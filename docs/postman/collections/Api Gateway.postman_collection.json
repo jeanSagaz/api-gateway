@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "48ee4a92-4e12-400e-b6b2-f927f398b04a",
-		"name": ".Net Api Gateway",
+		"name": "Api Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "641781"
 	},
@@ -15,12 +15,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/api/articles",
-							"protocol": "https",
+							"raw": "{{url-api-article}}/api/articles",
 							"host": [
-								"localhost"
+								"{{url-api-article}}"
 							],
-							"port": "5001",
 							"path": [
 								"api",
 								"articles"
@@ -35,12 +33,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/api/articles/1",
-							"protocol": "https",
+							"raw": "{{url-api-article}}/api/articles/1",
 							"host": [
-								"localhost"
+								"{{url-api-article}}"
 							],
-							"port": "5001",
 							"path": [
 								"api",
 								"articles",
@@ -56,12 +52,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5001/api/articles/weather-forecast",
-							"protocol": "https",
+							"raw": "{{url-api-article}}/api/articles/weather-forecast",
 							"host": [
-								"localhost"
+								"{{url-api-article}}"
 							],
-							"port": "5001",
 							"path": [
 								"api",
 								"articles",
@@ -86,12 +80,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5001/api/articles",
-							"protocol": "https",
+							"raw": "{{url-api-article}}/api/articles",
 							"host": [
-								"localhost"
+								"{{url-api-article}}"
 							],
-							"port": "5001",
 							"path": [
 								"api",
 								"articles"
@@ -111,12 +103,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5002/api/writers",
-							"protocol": "https",
+							"raw": "{{url-api-writter}}/api/writers",
 							"host": [
-								"localhost"
+								"{{url-api-writter}}"
 							],
-							"port": "5002",
 							"path": [
 								"api",
 								"writers"
@@ -131,12 +121,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5002/api/writers/1",
-							"protocol": "https",
+							"raw": "{{url-api-writter}}/api/writers/1",
 							"host": [
-								"localhost"
+								"{{url-api-writter}}"
 							],
-							"port": "5002",
 							"path": [
 								"api",
 								"writers",
@@ -161,12 +149,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5002/api/writers",
-							"protocol": "https",
+							"raw": "{{url-api-writter}}/api/writers",
 							"host": [
-								"localhost"
+								"{{url-api-writter}}"
 							],
-							"port": "5002",
 							"path": [
 								"api",
 								"writers"
@@ -181,17 +167,33 @@
 			"name": "Ocelot",
 			"item": [
 				{
+					"name": "Get time",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url-api-gateway}}/gateway/time",
+							"host": [
+								"{{url-api-gateway}}"
+							],
+							"path": [
+								"gateway",
+								"time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get articles",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5003/gateway/articles",
-							"protocol": "https",
+							"raw": "{{url-api-gateway}}/gateway/articles",
 							"host": [
-								"localhost"
+								"{{url-api-gateway}}"
 							],
-							"port": "5003",
 							"path": [
 								"gateway",
 								"articles"
@@ -206,36 +208,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:5003/gateway/writers",
-							"protocol": "https",
+							"raw": "{{url-api-gateway}}/gateway/writers",
 							"host": [
-								"localhost"
+								"{{url-api-gateway}}"
 							],
-							"port": "5003",
 							"path": [
 								"gateway",
 								"writers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get writers weather-forecast",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:5003/gateway/articles/wf",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "5003",
-							"path": [
-								"gateway",
-								"articles",
-								"wf"
 							]
 						}
 					},
@@ -256,12 +235,10 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:5003/gateway/writers",
-							"protocol": "https",
+							"raw": "{{url-api-gateway}}/gateway/writers",
 							"host": [
-								"localhost"
+								"{{url-api-gateway}}"
 							],
-							"port": "5003",
 							"path": [
 								"gateway",
 								"writers"

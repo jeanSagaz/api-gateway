@@ -30,3 +30,12 @@ As the documentation recommends.<br/>
 
 ## Running the project
 Go to the 'ApiGateway' project properties and select the 'Multiple startup projects' option and select the 3 projects with the 'Start' action.<br/>
+
+## Running the project with docker
+Run the command below to create an external network:  
+docker network create api-gateway-network --driver bridge  
+
+Run the following command below in the project root folder at the prompt:  
+docker-compose up -d  
+or  
+docker-compose up --build -d  
