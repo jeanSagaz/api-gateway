@@ -62,19 +62,19 @@ stages:
         buildType: 'current'
         artifactName: 'manifests'
         targetPath: '$(Pipeline.Workspace)/manifests'
-    - task: KubernetesManifest@1
+    - task: KubernetesManifest@0
       inputs:
         action: 'createSecret'
         # connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'test-aks-default'
+        # kubernetesServiceConnection: 'test-aks-default'
         namespace: 'default'
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
         dockerRegistryEndpoint: 'testazcr'
-    - task: KubernetesManifest@1
+    - task: KubernetesManifest@0
       displayName: Deploy to Kubernetes cluster      
       inputs:
-        action: deploy
+        action: 'deploy'
         # namespace: 'default'
         manifests: |
           $(Pipeline.Workspace)/manifests/deployment.yml
