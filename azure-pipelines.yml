@@ -10,8 +10,8 @@ variables:
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
   imageRepository: 'apigateway'
   containerRegistry: 'testazcr.azurecr.io'
-  dockerfilePath: '**/Dockerfile'  
-  # dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
+  # dockerfilePath: '**/Dockerfile'  
+  dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
@@ -38,6 +38,7 @@ stages:
         tags: |
           $(tag)
     - task: PublishPipelineArtifact@1
+      displayName: Publish Pipeline Artifact
       inputs:
         artifactName: 'manifests'
         path: 'manifests'
