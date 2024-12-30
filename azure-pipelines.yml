@@ -12,7 +12,7 @@ variables:
   containerRegistry: 'testazcr.azurecr.io'
   # dockerfilePath: '**/Dockerfile'
   # dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
