@@ -74,7 +74,7 @@ stages:
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
         dockerRegistryEndpoint: 'testazcr'
-    - task: KubernetesManifest@0
+    - task: KubernetesManifest@1
       displayName: Deploy to Kubernetes cluster      
       inputs:
         action: deploy
