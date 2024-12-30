@@ -8,9 +8,9 @@ builder.Configuration
     .SetBasePath(builder.Environment.ContentRootPath)
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
-    .AddJsonFile("ocelot.Production.json", optional: false, reloadOnChange: true)
-    //.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
-    //.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json") // environment file;
+    //.AddJsonFile("ocelot.Production.json", optional: false, reloadOnChange: true)
+    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json")
     .AddEnvironmentVariables();
 
 builder.Services.AddOcelot(builder.Configuration)
