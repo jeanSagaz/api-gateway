@@ -9,7 +9,7 @@ builder.Configuration
     .AddJsonFile("appsettings.json", true, true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
     .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json") // environment file;
+    // .AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json") // environment file;
     .AddEnvironmentVariables();
 
 builder.Services.AddOcelot(builder.Configuration)
