@@ -66,13 +66,12 @@ stages:
     - task: KubernetesManifest@1
       inputs:
         action: 'createSecret'
-        # connectionType: 'kubernetesServiceConnection'
-        # kubernetesServiceConnection: 'test-aks-default'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'test-aks-default'
         namespace: 'default'
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
         dockerRegistryEndpoint: 'testazcr'
-        # kubernetesServiceEndpoint: $(aks-cluster-service-connection)
     - task: KubernetesManifest@1
       displayName: Deploy to Kubernetes cluster      
       inputs:
