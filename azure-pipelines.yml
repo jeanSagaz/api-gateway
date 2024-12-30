@@ -17,7 +17,7 @@ variables:
   dockerfilePath: '**/Dockerfile'
   # dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   tag: '$(Build.BuildId)'
-  # imagePullSecret: 'testazcr6f3c-auth'
+  imagePullSecret: 'testazcr6f3c-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -71,7 +71,7 @@ stages:
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
         dockerRegistryEndpoint: 'testazcr'
-    - task: KubernetesManifest@0
+    - task: KubernetesManifest@1
       displayName: Deploy to Kubernetes cluster      
       inputs:
         action: deploy
