@@ -80,9 +80,7 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'test-aks-default'
         manifests: |
-          # $(Pipeline.Workspace)/manifests/deployment.yml
-          # $(Pipeline.Workspace)/manifests/service.yml
-          $(Pipeline.Workspace)/s/deployment.yml
-          $(Pipeline.Workspace)/s/service.yml
+          $(Pipeline.Workspace)/manifests/deployment.yml
+          $(Pipeline.Workspace)/manifests/service.yml
         containers: '$(containerRegistry)/$(imageRepository):$(tag)'
         imagePullSecrets: '$(imagePullSecret)'
