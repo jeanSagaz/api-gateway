@@ -1,7 +1,8 @@
 {
   "GlobalConfiguration": {
     "RequestIdKey": "X-Correlation-Id",
-    "BaseUrl": "https://localhost:5003"
+    // "BaseUrl": "https://localhost:5003"
+    "BaseUrl": "http://localhost:8080"
     //"RequestIdKey": "OcRequestId"    
   },
   "Routes": [
