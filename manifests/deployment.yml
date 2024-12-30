@@ -2,9 +2,6 @@ apiVersion : apps/v1
 kind: Deployment
 metadata:
   name: apigateway 
-labels:
-    app: apigateway
-    environment: production
 spec:
   replicas: 1
   selector:
