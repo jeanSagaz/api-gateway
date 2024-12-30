@@ -10,8 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: apigateway 
-        environment: production
+        app: apigateway
     spec:
       containers:
         - name: apigateway 
