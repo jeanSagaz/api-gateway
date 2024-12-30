@@ -1,7 +1,3 @@
-# Deploy to Azure Kubernetes Service
-# Build and push image to Azure Container Registry; Deploy to Azure Kubernetes Service
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
@@ -14,8 +10,9 @@ variables:
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
   imageRepository: 'apigateway'
   containerRegistry: 'testazcr.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  # dockerfilePath: '**/Dockerfile'
   # dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
@@ -33,19 +30,16 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
+      displayName: Build and publish image to Azure Container Registry
       inputs:
         containerRegistry: $(dockerRegistryServiceConnection)
         repository: '$(imageRepository)'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        Dockerfile: dockerfilePath
         tags: |
           $(tag)
     - task: PublishPipelineArtifact@1
       inputs:
-        # targetPath: '$(Pipeline.Workspace)/s/kubernetes'
-        # targetPath: '$(Pipeline.Workspace)'
-        # artifact: 'manifests'        
-        # publishLocation: 'pipeline'
         artifactName: 'manifests'
         path: 'manifests'
 
