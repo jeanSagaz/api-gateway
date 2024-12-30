@@ -17,3 +17,7 @@ spec:
           image: testazcr.azurecr.io/apigateway
           ports:
           - containerPort: 8080
+          # adicionando
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
