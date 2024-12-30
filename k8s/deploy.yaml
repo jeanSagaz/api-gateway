@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-api-gateway
+  # namespace: microservices
+spec:
+  selector:
+    matchLabels:
+      app: service-api-gateway
+  replicas: 2
+  revisionHistoryLimit: 1
+  strategy:
+     type: RollingUpdate
+     rollingUpdate:
+       maxSurge: 1
+       maxUnavailable: 2
+  template:
+    metadata:
+      labels:
+        app: service-api-gateway
+    spec:
+      # imagePullSecrets:
+      #   - name: secret-time
+      # initContainers:
+      #   - image: alpine
+      #     imagePullPolicy: IfNotPresent
+      #     name: init-debug
+      #     command: ["cp","/config/appsettings.Production.json","/root"]
+      #     volumeMounts:
+      #     - name: config-app
+      #       mountPath: /config
+      #     - name: root
+      #       mountPath: /root
+      containers:
+        - name: api-gateway
+          # image: docker.io/jeansagaz/api.gateway:v1
+          image: docker.io/jeansagaz/api.article:v1
+          # imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "1Gi"
+              cpu: "750m"
+          # command: [ "/bin/sh","-c" ]
+          # # args: ["cp -f /root/* /app ; dotnet Time.Api.dll"]
+          # args: ["cp -f /root/* /app/publish/Time.Api ; dotnet Time.Api.dll"]
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+              # value: Docker
+            - name: TZ
+              value: America/Sao_Paulo
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "5001"
+          # volumeMounts:
+          #   - name: root
+          #     mountPath: /root   
+          ports:
+            - containerPort: 5001
+      # volumes: 
+      #   - name: config-app
+      #     configMap:
+      #       name: api-gateway
+      #   - name: root
+      #     emptyDir: {}
+      # nodeSelector:
+      #    workertype: microservices
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-api-gateway
+  # namespace: microservices
+spec:
+  selector:
+    app: service-api-gateway
+  ports:
+    - port: 8080
+      targetPort: 5001
+      nodePort: 30000
+  type: LoadBalancer

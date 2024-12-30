@@ -39,3 +39,20 @@ Run the following command below in the project root folder at the prompt:
 docker-compose up -d  
 or  
 docker-compose up --build -d  
+
+## publicar a imagem no docker.hub
+docker-compose build  
+docker push docker.io/jeansagaz/api.gateway:v1  
+
+## criar o cluster k8s utilizando o k3d
+k3d cluster create cluster-k8s-gateway --servers 3 --agents 3 -p "30000:30000@loadbalancer"
+
+## publica a aplicação no k8s
+kubectl apply -f .\k8s\deploy.yaml  
+
+## apagar cluster k8s utilizado o k3d
+k3d cluster delete cluster-k8s-gateway  
+
+k3d cluster list
+
+kubectl get all

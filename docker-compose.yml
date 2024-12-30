@@ -1,8 +1,8 @@
 services:
 
   api-gateway:
-    image: ${DOCKER_REGISTRY-}api.gateway:v1
-    # image: jeansagaz/api.gateway:v1
+    # image: ${DOCKER_REGISTRY-}api.gateway:v1
+    image: jeansagaz/api.gateway:v1
     container_name: api-gateway
     build:
       context: .
@@ -20,9 +20,8 @@ services:
       - api-gateway-network
 
   article-api:
-    # hostname: api-article
-    image: ${DOCKER_REGISTRY-}api.article:v1
-    # image: jeansagaz/api.article:v1
+    # image: ${DOCKER_REGISTRY-}api.article:v1
+    image: jeansagaz/api.article:v1
     container_name: article-api
     build:
       context: .
@@ -40,9 +39,8 @@ services:
       - api-gateway-network
 
   writter-api:
-    # hostname: api-writter
-    image: ${DOCKER_REGISTRY-}api.writter:v1
-    # image: jeansagaz/api.writter:v1
+    # image: ${DOCKER_REGISTRY-}api.writter:v1
+    image: jeansagaz/api.writter:v1
     container_name: writter-api
     build:
       context: .
