@@ -42,7 +42,7 @@ stages:
           $(tag)
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/s/kubernets'
+        targetPath: '$(Pipeline.Workspace)/s/kubernetes'
         artifact: 'manifests'
         publishLocation: 'pipeline'
 
@@ -50,7 +50,7 @@ stages:
   displayName: Deploy to Dev
   dependsOn: Build
   variables:
-    acrsecret: testazcr6f3c-auth
+    acrsecret: $(imagePullSecret)
   jobs:
   - job: Deploy
     displayName: Deploy to AKS
@@ -79,7 +79,7 @@ stages:
         manifests: |
           $(Pipeline.Workspace)/manifests/deployment.yml
           $(Pipeline.Workspace)/manifests/service.yml
-        # imagePullSecrets: |
-        #   $(imagePullSecret)
-        # containers: |
-        #   $(containerRegistry)/$(imageRepository):$(tag)
+        imagePullSecrets: |
+          $(imagePullSecret)
+        containers: |
+          $(containerRegistry)/$(imageRepository):$(tag)
