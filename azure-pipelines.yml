@@ -43,7 +43,6 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         # targetPath: '$(Pipeline.Workspace)/s/kubernetes'
-        targetPath: '$(Pipeline.Workspace)/kubernetes'
         artifact: 'manifests'
         # artifactName: 'manifests'
         publishLocation: 'pipeline'
@@ -73,6 +72,7 @@ stages:
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
         dockerRegistryEndpoint: 'testazcr'
+        # kubernetesServiceEndpoint: $(aks-cluster-service-connection)
     - task: KubernetesManifest@1
       displayName: Deploy to Kubernetes cluster      
       inputs:
