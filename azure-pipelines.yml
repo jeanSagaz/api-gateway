@@ -79,8 +79,8 @@ stages:
       inputs:
         action: deploy
         namespace: 'default'
-        # connectionType: 'kubernetesServiceConnection'
-        # kubernetesServiceConnection: 'test-aks-default'
+        connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'test-aks-default'
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
           $(System.ArtifactsDirectory)/manifests/service.yml
