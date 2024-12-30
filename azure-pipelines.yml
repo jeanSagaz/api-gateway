@@ -24,60 +24,62 @@ variables:
 
 
 stages:
-
-
-
 - stage: Build
-  displayName: Build stage
-  jobs:
+  displayName: Build Image
+  jobs:  
   - job: Build
     displayName: Build
     pool:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        repository: '$(imageRepository)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
-
-    - upload: manifests
-      artifact: manifests
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/s/kubernets'
+        artifact: 'manifests'
+        publishLocation: 'pipeline'
 
 - stage: Deploy
-  displayName: Deploy stage
+  displayName: Deploy to Dev
   dependsOn: Build
-
+  variables:
+    acrsecret: testazcr6f3c-auth
   jobs:
-  - deployment: Deploy
-    displayName: Deploy
+  - job: Deploy
+    displayName: Deploy to AKS
     pool:
       vmImage: $(vmImageName)
-    environment: 'jeanSagazapigateway.default'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          # - task: KubernetesManifest@0
-          #   displayName: Create imagePullSecret
-          #   inputs:
-          #     action: createSecret
-          #     secretName: $(imagePullSecret)
-          #     dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
-
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              # imagePullSecrets: |
-              #   $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
-
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'manifests'
+        targetPath: '$(Pipeline.Workspace)/manifests'
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'createSecret'
+        # connectionType: 'kubernetesServiceConnection'
+        kubernetesServiceConnection: 'test-aks-default'
+        namespace: 'default'
+        secretType: 'dockerRegistry'
+        secretName: '$(acrsecret)'
+        dockerRegistryEndpoint: 'testazcr'
+    - task: KubernetesManifest@0
+      displayName: Deploy to Kubernetes cluster      
+      inputs:
+        action: deploy
+        # namespace: 'default'
+        manifests: |
+          $(Pipeline.Workspace)/manifests/deployment.yml
+          $(Pipeline.Workspace)/manifests/service.yml
+        # imagePullSecrets: |
+        #   $(imagePullSecret)
+        # containers: |
+        #   $(containerRegistry)/$(imageRepository):$(tag)
