@@ -14,8 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
   imageRepository: 'apigateway'
   containerRegistry: 'testazcr.azurecr.io'
-  # dockerfilePath: '**/Dockerfile'
-  dockerfilePath: 'src/ApiArticle/Dockerfile'
+  dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
