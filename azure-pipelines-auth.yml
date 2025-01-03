@@ -8,7 +8,7 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
-  imageRepository: 'authentication.api'
+  imageRepository: 'authentication_api'
   containerRegistry: 'testazcr.azurecr.io'
   # dockerfilePath: '**/Dockerfile'    
   dockerfilePath: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'

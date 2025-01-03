@@ -1,20 +1,20 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: authentication.api
+  name: authenticationapi
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: authentication.api
+      app: authenticationapi
   template:
     metadata:
       labels:
-        app: authentication.api
+        app: authenticationapi
     spec:
       containers:
-        - name: authentication.api 
-          image: testazcr.azurecr.io/authentication.api
+        - name: authenticationapi 
+          image: testazcr.azurecr.io/authentication_api
           ports:
           - containerPort: 8080
           env: 
