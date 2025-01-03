@@ -13,8 +13,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authenticationapi"
-          //"Port": 5001
+          "Host": "authenticationapi",
+          "Port": 80
         }
       ],
       "SwaggerKey": "auth"
