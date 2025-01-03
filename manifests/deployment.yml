@@ -13,7 +13,7 @@ spec:
         app: apigateway
     spec:
       containers:
-        - name: api_gateway 
+        - name: apigateway 
           image: testazcr.azurecr.io/api_gateway
           ports:
           - containerPort: 8080
