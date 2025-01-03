@@ -13,7 +13,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "4.242.110.254",
+          "Host": "authenticationapi",
           "Port": 8081
         }
       ],
