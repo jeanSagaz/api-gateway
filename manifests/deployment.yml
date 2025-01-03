@@ -1,16 +1,16 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: apiGateway 
+  name: apigateway 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: apiGateway
+      app: apigateway
   template:
     metadata:
       labels:
-        app: apiGateway
+        app: apigateway
     spec:
       containers:
         - name: api_gateway 
