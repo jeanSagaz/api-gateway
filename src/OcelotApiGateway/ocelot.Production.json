@@ -13,8 +13,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authenticationapi",
-          "Port": 8080
+          "Host": "authenticationapi"
+          //"Port": 5001
         }
       ],
       "SwaggerKey": "auth"
@@ -124,7 +124,7 @@
         {
           "Name": "Auth API",
           "Version": "v1",
-          "Url": "http://authentication.api/swagger/v1/swagger.json"
+          "Url": "http://authenticationapi/swagger/v1/swagger.json"
         }
       ]
     },
