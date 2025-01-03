@@ -1,20 +1,20 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: api.gateway 
+  name: api_gateway 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api.gateway
+      app: api_gateway
   template:
     metadata:
       labels:
-        app: api.gateway
+        app: api_gateway
     spec:
       containers:
         - name: api_gateway 
-          image: testazcr.azurecr.io/api.gateway
+          image: testazcr.azurecr.io/api_gateway
           ports:
           - containerPort: 8080
           env: 
