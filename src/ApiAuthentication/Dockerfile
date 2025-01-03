@@ -10,17 +10,17 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/ApiArticle/ApiArticle.csproj", "src/ApiArticle/"]
-RUN dotnet restore "./src/ApiArticle/ApiArticle.csproj"
+COPY ["ApiAuthentication.csproj", "ApiAuthentication/"]
+RUN dotnet restore "./ApiAuthentication/ApiAuthentication.csproj"
 COPY . .
-WORKDIR "/src/src/ApiArticle"
-RUN dotnet build "./ApiArticle.csproj" -c $BUILD_CONFIGURATION -o /app/build
+# WORKDIR "/src/src/ApiAuthentication"
+# RUN dotnet build "./ApiAuthentication.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ApiArticle.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ApiAuthentication.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ApiArticle.dll"]
+ENTRYPOINT ["dotnet", "ApiAuthentication.dll"]

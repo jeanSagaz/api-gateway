@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - ApiGateway", "00 - Api
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "src\OcelotApiGateway\OcelotApiGateway.csproj", "{90E769E6-4231-469E-AF54-737021E6C09C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiArticle", "ApiArticle", "{4F57295A-236B-455A-A0BC-EFD5BE3D90FA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiAuthentication", "ApiAuthentication", "{4F57295A-236B-455A-A0BC-EFD5BE3D90FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiWriter", "ApiWriter", "{3C09D0E4-0648-4603-9824-65633F1CBA48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiArticle", "src\ApiArticle\ApiArticle.csproj", "{2CFCFA33-289E-4C3C-8FB4-F91AC2E65A27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAuthentication", "src\ApiAuthentication\ApiAuthentication.csproj", "{2CFCFA33-289E-4C3C-8FB4-F91AC2E65A27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWritter", "src\ApiWritter\ApiWritter.csproj", "{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2}"
 EndProject

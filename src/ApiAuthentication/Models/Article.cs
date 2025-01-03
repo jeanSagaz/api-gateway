@@ -1,4 +1,4 @@
-﻿namespace ApiArticle.Models
+﻿namespace ApiAuthentication.Models
 {
     public class Article
     {

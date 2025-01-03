@@ -1,10 +1,9 @@
-using ApiArticle.Interfaces;
-using ApiArticle.Repositories;
+using ApiAuthentication.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

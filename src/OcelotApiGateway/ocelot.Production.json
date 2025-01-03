@@ -5,6 +5,20 @@
     //"RequestIdKey": "OcRequestId"    
   },
   "Routes": [
+    // api - auth
+    {
+      "UpstreamPathTemplate": "/gateway/auth",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/authentication",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication.api"
+          //"Port": 5001
+        }
+      ],
+      "SwaggerKey": "auth"
+    },
     // api - writers
     {
       "UpstreamPathTemplate": "/gateway/writers",
@@ -42,7 +56,6 @@
         }
       ]
     },
-    // api - articles
     {
       "UpstreamPathTemplate": "/gateway/articles/wf",
       "UpstreamHttpMethod": [ "Get" ],
@@ -51,7 +64,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5002
         }
       ]
     },
@@ -63,7 +76,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5002
         }
       ]
     },
@@ -75,7 +88,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5002
         }
       ]
     },
@@ -102,6 +115,26 @@
           "Name": "Time API",
           "Version": "v1",
           "Url": "https://app-time-service-gffkf8adgcg2dvdr.centralus-01.azurewebsites.net/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "auth",
+      "Config": [
+        {
+          "Name": "Auth API",
+          "Version": "v1",
+          "Url": "http://authentication.api/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "writer",
+      "Config": [
+        {
+          "Name": "Writer API",
+          "Version": "v1",
+          "Url": "https://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     }
