@@ -1,7 +1,8 @@
 {
   "GlobalConfiguration": {
     "RequestIdKey": "X-Correlation-Id",
-    "BaseUrl": "http://localhost:31744"
+    //"BaseUrl": "http://localhost:31744"
+    "BaseUrl": "http://apigateway"
     //"RequestIdKey": "OcRequestId"    
   },
   "Routes": [
