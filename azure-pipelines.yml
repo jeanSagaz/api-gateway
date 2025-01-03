@@ -10,8 +10,9 @@ variables:
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
   imageRepository: 'apigateway'
   containerRegistry: 'testazcr.azurecr.io'
-  dockerfilePath: '**/Dockerfile'  
+  # dockerfilePath: '**/Dockerfile'  
   # dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/ApiArticle/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
@@ -76,7 +77,7 @@ stages:
         connectionType: 'kubernetesServiceConnection'
         kubernetesServiceConnection: 'test-aks-default'
         manifests: |
-          $(System.ArtifactsDirectory)/manifests/deployment.yml
-          $(System.ArtifactsDirectory)/manifests/service.yml
+          $(System.ArtifactsDirectory)/manifests/auth-api/deployment.yml
+          $(System.ArtifactsDirectory)/manifests/auth-api/service.yml
         containers: '$(containerRegistry)/$(imageRepository):$(tag)'
         imagePullSecrets: '$(imagePullSecret)'

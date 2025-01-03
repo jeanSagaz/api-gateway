@@ -8,14 +8,3 @@ spec:
     - port: 8080 
     selector:
         app: apigateway
----
-apiVersion: v1
-kind: Service
-metadata:
-    name: authentication-api
-spec:
-    type: LoadBalancer
-    ports:
-    - port: 8081 
-    selector:
-        app: authentication-api

@@ -1,8 +1,8 @@
-using ApiArticle.Interfaces;
-using ApiArticle.Models;
+using ApiWritter.Interfaces;
+using ApiWritter.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiArticle.Controllers
+namespace ApiWritter.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
