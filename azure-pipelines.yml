@@ -90,4 +90,5 @@ stages:
         containers: |
           $(containerRegistry)/$(imageGatewayRepository):$(tag)
           $(containerRegistry)/$(imageAuthRepository):$(tag)
-        imagePullSecrets: '$(imagePullSecret)'
+        imagePullSecrets: |
+          $(imagePullSecret)
