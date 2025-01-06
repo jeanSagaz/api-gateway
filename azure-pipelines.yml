@@ -26,10 +26,11 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      # vmImage: $(vmImageName)
+      name: Azure Pipelines
     steps:
     - script: echo "dockerRegistry $(dockerRegistry)"
-      displayName: Library
+      displayName: "Library"
 #     - task: Docker@2
 #       displayName: Build and publish '$(imageGatewayRepository)' image to Azure Container Registry
 #       inputs:
