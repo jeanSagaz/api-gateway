@@ -87,5 +87,7 @@ stages:
         kubernetesServiceConnection: 'test-aks-default'
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
-        containers: '$(containerRegistry)/$(imageAuthRepository):$(tag)'
+        containers: |
+          '$(containerRegistry)/$(imageGatewayRepository):$(tag)'
+          '$(containerRegistry)/$(imageAuthRepository):$(tag)'
         imagePullSecrets: '$(imagePullSecret)'
