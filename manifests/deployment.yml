@@ -20,26 +20,3 @@ spec:
           env: 
             - name: ASPNETCORE_ENVIRONMENT
               value: "Production"
----
-apiVersion : apps/v1
-kind: Deployment
-metadata:
-  name: authenticationapi
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: authenticationapi
-  template:
-    metadata:
-      labels:
-        app: authenticationapi
-    spec:
-      containers:
-        - name: authenticationapi 
-          image: testazcr.azurecr.io/authentication_api
-          ports:
-          - containerPort: 8080
-          env: 
-            - name: ASPNETCORE_ENVIRONMENT
-              value: "Production"
