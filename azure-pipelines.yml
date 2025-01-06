@@ -17,6 +17,7 @@ variables:
   dockerfileAuthPath: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
+  group: 'k8s'
 
 stages:
 - stage: Build
@@ -27,67 +28,69 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: Docker@2
-      displayName: Build and publish '$(imageGatewayRepository)' image to Azure Container Registry
-      inputs:
-        containerRegistry: $(dockerRegistryServiceConnection)
-        repository: '$(imageGatewayRepository)'
-        command: 'buildAndPush'
-        Dockerfile: $(dockerfileGatewayPath)
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Build and publish '$(imageAuthRepository)' image to Azure Container Registry
-      inputs:
-        containerRegistry: $(dockerRegistryServiceConnection)
-        repository: '$(imageAuthRepository)'
-        command: 'buildAndPush'
-        Dockerfile: $(dockerfileAuthPath)
-        tags: |
-          $(tag)
-    - task: PublishPipelineArtifact@1
-      displayName: Publish Pipeline Artifact
-      inputs:
-        artifactName: 'manifests'
-        path: 'manifests'
+    - script: echo "dockerRegistry $(dockerRegistry)"
+      displayName: Library
+#     - task: Docker@2
+#       displayName: Build and publish '$(imageGatewayRepository)' image to Azure Container Registry
+#       inputs:
+#         containerRegistry: $(dockerRegistryServiceConnection)
+#         repository: '$(imageGatewayRepository)'
+#         command: 'buildAndPush'
+#         Dockerfile: $(dockerfileGatewayPath)
+#         tags: |
+#           $(tag)
+#     - task: Docker@2
+#       displayName: Build and publish '$(imageAuthRepository)' image to Azure Container Registry
+#       inputs:
+#         containerRegistry: $(dockerRegistryServiceConnection)
+#         repository: '$(imageAuthRepository)'
+#         command: 'buildAndPush'
+#         Dockerfile: $(dockerfileAuthPath)
+#         tags: |
+#           $(tag)
+#     - task: PublishPipelineArtifact@1
+#       displayName: Publish Pipeline Artifact
+#       inputs:
+#         artifactName: 'manifests'
+#         path: 'manifests'
 
-- stage: Deploy
-  displayName: Deploy to Dev
-  dependsOn: Build
-  variables:
-    acrsecret: $(imagePullSecret)
-  jobs:
-  - job: Deploy
-    displayName: Deploy to AKS
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'manifests'
-        targetPath: '$(System.ArtifactsDirectory)/manifests'
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'createSecret'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'test-aks-default'
-        namespace: 'default'
-        secretType: 'dockerRegistry'
-        secretName: '$(acrsecret)'
-        dockerRegistryEndpoint: 'testazcr'
-    - task: KubernetesManifest@1
-      displayName: Deploy to Kubernetes cluster      
-      inputs:
-        action: deploy
-        namespace: 'default'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'test-aks-default'
-        manifests: |
-          $(System.ArtifactsDirectory)/manifests/deployment.yml
-          $(System.ArtifactsDirectory)/manifests/service.yml
-        containers: |
-          $(containerRegistry)/$(imageGatewayRepository):$(tag)
-          $(containerRegistry)/$(imageAuthRepository):$(tag)
-        imagePullSecrets: |
-          $(imagePullSecret)
+# - stage: Deploy
+#   displayName: Deploy to Dev
+#   dependsOn: Build
+#   variables:
+#     acrsecret: $(imagePullSecret)
+#   jobs:
+#   - job: Deploy
+#     displayName: Deploy to AKS
+#     pool:
+#       vmImage: $(vmImageName)
+#     steps:
+#     - task: DownloadPipelineArtifact@2
+#       inputs:
+#         buildType: 'current'
+#         artifactName: 'manifests'
+#         targetPath: '$(System.ArtifactsDirectory)/manifests'
+#     - task: KubernetesManifest@1
+#       inputs:
+#         action: 'createSecret'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'test-aks-default'
+#         namespace: 'default'
+#         secretType: 'dockerRegistry'
+#         secretName: '$(acrsecret)'
+#         dockerRegistryEndpoint: 'testazcr'
+#     - task: KubernetesManifest@1
+#       displayName: Deploy to Kubernetes cluster      
+#       inputs:
+#         action: deploy
+#         namespace: 'default'
+#         connectionType: 'kubernetesServiceConnection'
+#         kubernetesServiceConnection: 'test-aks-default'
+#         manifests: |
+#           $(System.ArtifactsDirectory)/manifests/deployment.yml
+#           $(System.ArtifactsDirectory)/manifests/service.yml
+#         containers: |
+#           $(containerRegistry)/$(imageGatewayRepository):$(tag)
+#           $(containerRegistry)/$(imageAuthRepository):$(tag)
+#         imagePullSecrets: |
+#           $(imagePullSecret)
