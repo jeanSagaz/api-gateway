@@ -11,7 +11,7 @@ variables:
   imageGatewayRepository: 'api_gateway'
   imageAuthRepository: 'authentication_api'
   containerRegistry: 'testazcr.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
+  dockerfileGatewayPath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   dockerfileAuthPath: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
@@ -36,8 +36,7 @@ stages:
         repository: '$(imageRepository)'
         command: 'buildAndPush'
         Dockerfile: |
-          $(dockerfilePath)
-          $(dockerfileAuthPath)
+          $(dockerfileGatewayPath)
         tags: |
           $(tag)
     - task: PublishPipelineArtifact@1
