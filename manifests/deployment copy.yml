@@ -1,0 +1,22 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: apigateway 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+        - name: apigateway 
+          image: testazcr.azurecr.io/api_gateway
+          ports:
+          - containerPort: 8080
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"

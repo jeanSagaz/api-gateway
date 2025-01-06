@@ -8,11 +8,9 @@ variables:
 
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
-  imageGatewayRepository: 'api_gateway'
-  imageAuthRepository: 'authentication_api'
+  imageRepository: 'api_gateway'
   containerRegistry: 'testazcr.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
-  dockerfileAuthPath: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'testazcr6f3c-auth'
 
@@ -35,9 +33,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         repository: '$(imageRepository)'
         command: 'buildAndPush'
-        Dockerfile: |
-          $(dockerfilePath)
-          $(dockerfileAuthPath)
+        Dockerfile: $(dockerfilePath)
         tags: |
           $(tag)
     - task: PublishPipelineArtifact@1
@@ -81,7 +77,5 @@ stages:
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
           $(System.ArtifactsDirectory)/manifests/service.yml
-        containers: |
-          '$(containerRegistry)/$(imageGatewayRepository):$(tag)'
-          '$(containerRegistry)/$(imageAuthRepository):$(tag)'
+        containers: '$(containerRegistry)/$(imageRepository):$(tag)'
         imagePullSecrets: '$(imagePullSecret)'
