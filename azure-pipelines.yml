@@ -88,6 +88,6 @@ stages:
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
         containers: |
-          '$(containerRegistry)/$(imageGatewayRepository):$(tag)'
-          '$(containerRegistry)/$(imageAuthRepository):$(tag)'
+          $(containerRegistry)/$(imageGatewayRepository):$(tag)
+          $(containerRegistry)/$(imageAuthRepository):$(tag)
         imagePullSecrets: '$(imagePullSecret)'
