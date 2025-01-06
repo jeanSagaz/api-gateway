@@ -7,18 +7,16 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
+  dockerRegistryServiceConnection: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'  
+  containerRegistry: 'testazcr.azurecr.io'  
+  imagePullSecret: 'testazcr6f3c-auth'
+  tag: '$(Build.BuildId)'  
   imageGatewayRepository: 'api_gateway'
   imageAuthRepository: 'authentication_api'
-  containerRegistry: 'testazcr.azurecr.io'
   dockerfileGatewayPath: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   dockerfileAuthPath: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'testazcr6f3c-auth'
-
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
-
 
 stages:
 - stage: Build
@@ -87,6 +85,7 @@ stages:
         kubernetesServiceConnection: 'test-aks-default'
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
+          $(System.ArtifactsDirectory)/manifests/service.yml
         containers: |
           $(containerRegistry)/$(imageGatewayRepository):$(tag)
           $(containerRegistry)/$(imageAuthRepository):$(tag)
