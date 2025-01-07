@@ -12,28 +12,26 @@ services:
     ports:
       - "5003:8080"
     environment:
-      - TZ=America/Sao_Paulo
-      - ASPNETCORE_ENVIRONMENT=Docker
-      # - ASPNETCORE_ENVIRONMENT=Production
+      - TZ=America/Sao_Paulo      
+      - ASPNETCORE_ENVIRONMENT=Production
       # - ASPNETCORE_URLS=http://+:7195
     networks:
       - api-gateway-network
 
-  article-api:
-    # image: ${DOCKER_REGISTRY-}api.article:v1
-    image: jeansagaz/api.article:v1
+  auth-api:
+    # image: ${DOCKER_REGISTRY-}api.auth:v1
+    image: jeansagaz/api.auth:v1
     container_name: article-api
     build:
       context: .
-      dockerfile: /src/ApiArticle/Dockerfile
-      # dockerfile: ./src/ApiArticle/Dockerfile
+      dockerfile: /src/ApiAuthentication/Dockerfile
+      # dockerfile: ./src/ApiAuthentication/Dockerfile
     # restart: unless-stopped
     ports:
       - "5001:8080"
     environment:
-      - TZ=America/Sao_Paulo
-      - ASPNETCORE_ENVIRONMENT=Docker
-      # - ASPNETCORE_ENVIRONMENT=Production
+      - TZ=America/Sao_Paulo      
+      - ASPNETCORE_ENVIRONMENT=Production
       # - ASPNETCORE_URLS=http://+:7195
     networks:
       - api-gateway-network

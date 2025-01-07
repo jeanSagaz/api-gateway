@@ -8,7 +8,7 @@
     // api - auth
     {
       "UpstreamPathTemplate": "/gateway/auth",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Post", "Get" ],
       "DownstreamPathTemplate": "/api/authentication",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

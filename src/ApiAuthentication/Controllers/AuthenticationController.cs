@@ -10,11 +10,15 @@ namespace ApiAuthentication.Controllers
     {
         private readonly ILogger<AuthenticationController> _logger;
         private readonly IJwtTokenService _articleRepository;
+        private readonly string _password;
 
-        public AuthenticationController(ILogger<AuthenticationController> logger, IJwtTokenService articleRepository)
+        public AuthenticationController(ILogger<AuthenticationController> logger, 
+            IJwtTokenService articleRepository,
+            IConfiguration configuration)
         {
             _logger = logger;
             _articleRepository = articleRepository;
+            _password = configuration["User:Password"]!;
         }
 
         [HttpPost]
@@ -26,5 +30,8 @@ namespace ApiAuthentication.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult Get() => Ok(new { password = _password });
     }
 }
