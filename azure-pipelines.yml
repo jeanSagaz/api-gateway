@@ -7,7 +7,7 @@ resources:
 variables:
 - group: k8s
 - name: dockerRegistryServiceConnection
-  value: 'f0549fdc-9665-4b57-bdac-cc4d6199b174'
+  value: '$[variables.dockerRegistry]'
 - name: containerRegistry
   value: '$[variables.container]'
 - name: imagePullSecret
