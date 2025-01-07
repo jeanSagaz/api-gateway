@@ -11,7 +11,7 @@ variables:
 - name: containerRegistry
   value: '$[variables.containerRegistry]'
 - name: imagePullSecret
-  value: '$[variables.imagePullSecret]'
+  value: '$[variables.pullSecret]'
 - name: kubernetesServiceConnection
   value: '$[variables.serviceConnection]'
 - name: dockerRegistryEndpoint
