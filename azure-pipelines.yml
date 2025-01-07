@@ -9,9 +9,13 @@ variables:
 - name: dockerRegistryServiceConnection
   value: '$[variables.dockerRegistry]'
 - name: containerRegistry
-  value: 'testazcr.azurecr.io'  
+  value: '$[variables.containerRegistry]'
 - name: imagePullSecret
-  value: 'testazcr6f3c-auth'
+  value: '$[variables.imagePullSecret]'
+- name: kubernetesServiceConnection
+  value: '$[variables.serviceConnection]'
+- name: dockerRegistryEndpoint
+  value: '$[variables.registryEndpoint]'
 - name: tag
   value: '$(Build.BuildId)'  
 - name: imageGatewayRepository
@@ -60,7 +64,7 @@ stages:
         path: 'manifests'
 
 - stage: Deploy
-  displayName: Deploy to Dev
+  displayName: Deploy to Prod
   dependsOn: Build
   variables:
     acrsecret: $(imagePullSecret)
@@ -79,18 +83,18 @@ stages:
       inputs:
         action: 'createSecret'
         connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'test-aks-default'
+        kubernetesServiceConnection: $(kubernetesServiceConnection)
         namespace: 'default'
         secretType: 'dockerRegistry'
         secretName: '$(acrsecret)'
-        dockerRegistryEndpoint: 'testazcr'
+        dockerRegistryEndpoint: $(dockerRegistryEndpoint)
     - task: KubernetesManifest@1
       displayName: Deploy to Kubernetes cluster      
       inputs:
         action: deploy
         namespace: 'default'
         connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: 'test-aks-default'
+        kubernetesServiceConnection: $(kubernetesServiceConnection)
         manifests: |
           $(System.ArtifactsDirectory)/manifests/deployment.yml
           $(System.ArtifactsDirectory)/manifests/service.yml
