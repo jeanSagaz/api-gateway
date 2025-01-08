@@ -40,14 +40,7 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-    steps:
-    # - task: FileTransform@2
-    #   displayName: 'Variable substitution for JSON'
-    #   inputs:
-    #     folderPath: ''
-    #     xmlTransformationRules: ''
-    #     jsonTargetFiles: 'config.json'
-
+    steps:    
     - bash: |
         cat $(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json
       displayName: 'Print JSON before Variable substitution'
