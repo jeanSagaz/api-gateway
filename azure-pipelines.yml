@@ -56,6 +56,7 @@ stages:
       inputs:
         # folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
         folderPath: ''
+        xmlTransformationRules: ''
         jsonTargetFiles: '$(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json'
 
     - bash: |
