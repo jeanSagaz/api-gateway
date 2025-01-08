@@ -29,6 +29,8 @@ variables:
   # Agent VM image name
 - name: vmImageName
   value: 'ubuntu-latest'
+- name: User.Password
+  value: '$[variables.password]'
 
 stages:
 - stage: Build
@@ -39,6 +41,27 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    # - task: FileTransform@2
+    #   displayName: 'Variable substitution for JSON'
+    #   inputs:
+    #     folderPath: ''
+    #     xmlTransformationRules: ''
+    #     jsonTargetFiles: 'config.json'
+
+    - bash: |
+        cat $(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json
+      displayName: 'Print JSON before Variable substitution'
+    - task: FileTransform@2
+      displayName: 'Variable substitution for JSON'
+      inputs:
+        # folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        folderPath: ''
+        jsonTargetFiles: '$(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json'
+
+    - bash: |
+        cat $(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json
+      displayName: 'Print JSON after Variable substitution'
+
     - task: Docker@2
       displayName: Build and publish '$(imageGatewayRepository)' image to Azure Container Registry
       inputs:
