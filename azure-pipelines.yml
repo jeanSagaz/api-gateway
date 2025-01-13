@@ -6,6 +6,7 @@ resources:
 
 variables:
 - group: k8s
+- group: sensitive
 - name: dockerRegistryServiceConnection
   value: '$[variables.dockerRegistry]'
 - name: containerRegistry
