@@ -60,7 +60,7 @@ stages:
         # sources: '**/appsettings.Production.json'
         sources: 'src/ApiAuthentication/appsettings.Production.json'
         tokenPattern: 'doubleunderscores'
-        encoding: utf-8
+        encoding: 'utf-8'
 
     - bash: |
         cat $(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json
