@@ -30,8 +30,6 @@ variables:
   # Agent VM image name
 - name: vmImageName
   value: 'ubuntu-latest'
-# - name: User.Password
-#   value: '$[variables.password]'
 
 stages:
 - stage: Build
@@ -41,18 +39,11 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-    steps:    
+    
+    steps:
     - bash: |
         cat $(Build.SourcesDirectory)/src/ApiAuthentication/appsettings.Production.json
       displayName: 'Print JSON before Variable substitution'
-    
-    # - task: FileTransform@2
-    #   displayName: 'Variable substitution for JSON'
-    #   inputs:
-    #     # folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    #     folderPath: ''
-    #     xmlTransformationRules: ''
-    #     jsonTargetFiles: 'src/ApiAuthentication/appsettings.Production.json'
 
     - task: replacetokens@6
       displayName: 'Replace tokens **/appsettings.Production.json'
