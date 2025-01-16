@@ -87,37 +87,41 @@ stages:
   variables:
     acrsecret: $(imagePullSecret)
   jobs:
-  - job: Deploy
+  - deployment: Deploy
     displayName: Deploy to AKS
+    environment: '$(kubernetesServiceConnection)'
     pool:
       vmImage: $(vmImageName)
-    steps:
-    - task: DownloadPipelineArtifact@2
-      inputs:
-        buildType: 'current'
-        artifactName: 'manifests'
-        targetPath: '$(System.ArtifactsDirectory)/manifests'
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'createSecret'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: $(kubernetesServiceConnection)
-        namespace: 'default'
-        secretType: 'dockerRegistry'
-        secretName: '$(acrsecret)'
-        dockerRegistryEndpoint: $(dockerRegistryEndpoint)
-    - task: KubernetesManifest@1
-      displayName: Deploy to Kubernetes cluster      
-      inputs:
-        action: deploy
-        namespace: 'default'
-        connectionType: 'kubernetesServiceConnection'
-        kubernetesServiceConnection: $(kubernetesServiceConnection)
-        manifests: |
-          $(System.ArtifactsDirectory)/manifests/deployment.yml
-          $(System.ArtifactsDirectory)/manifests/service.yml
-        containers: |
-          $(containerRegistry)/$(imageGatewayRepository):$(tag)
-          $(containerRegistry)/$(imageAuthRepository):$(tag)
-        imagePullSecrets: |
-          $(imagePullSecret)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'manifests'
+              targetPath: '$(System.ArtifactsDirectory)/manifests'
+          - task: KubernetesManifest@1
+            inputs:
+              action: 'createSecret'
+              connectionType: 'kubernetesServiceConnection'
+              kubernetesServiceConnection: $(kubernetesServiceConnection)
+              namespace: 'default'
+              secretType: 'dockerRegistry'
+              secretName: '$(acrsecret)'
+              dockerRegistryEndpoint: $(dockerRegistryEndpoint)
+          - task: KubernetesManifest@1
+            displayName: Deploy to Kubernetes cluster      
+            inputs:
+              action: deploy
+              namespace: 'default'
+              connectionType: 'kubernetesServiceConnection'
+              kubernetesServiceConnection: $(kubernetesServiceConnection)
+              manifests: |
+                $(System.ArtifactsDirectory)/manifests/deployment.yml
+                $(System.ArtifactsDirectory)/manifests/service.yml
+              containers: |
+                $(containerRegistry)/$(imageGatewayRepository):$(tag)
+                $(containerRegistry)/$(imageAuthRepository):$(tag)
+              imagePullSecrets: |
+                $(imagePullSecret)
