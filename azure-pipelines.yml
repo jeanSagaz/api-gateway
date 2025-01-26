@@ -106,23 +106,22 @@ stages:
             inputs:
               action: 'createSecret'
               connectionType: 'kubernetesServiceConnection'
-              kubernetesServiceConnection: $(kubernetesServiceConnection)
+              kubernetesServiceConnection: 'test-aks-default'
               namespace: 'default'
               secretType: 'dockerRegistry'
               secretName: '$(acrsecret)'
-              dockerRegistryEndpoint: $(dockerRegistryEndpoint)
+              dockerRegistryEndpoint: '$(dockerRegistryEndpoint)'
           - task: KubernetesManifest@1
             displayName: Deploy to Kubernetes cluster      
             inputs:
-              action: deploy
-              namespace: 'default'
+              action: 'deploy'
               connectionType: 'kubernetesServiceConnection'
-              kubernetesServiceConnection: $(kubernetesServiceConnection)
+              kubernetesServiceConnection: 'test-aks-default'
+              namespace: 'default'
               manifests: |
                 $(System.ArtifactsDirectory)/manifests/deployment.yml
                 $(System.ArtifactsDirectory)/manifests/service.yml
               containers: |
                 $(containerRegistry)/$(imageGatewayRepository):$(tag)
                 $(containerRegistry)/$(imageAuthRepository):$(tag)
-              imagePullSecrets: |
-                $(imagePullSecret)
+              imagePullSecrets: '$(imagePullSecret)'
