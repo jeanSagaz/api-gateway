@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - ApiGateway", "00 - ApiGateway", "{7C1E7A66-B2A8-4E3D-8739-742473FE0BB5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - ApiGateway", "01 - ApiGateway", "{7C1E7A66-B2A8-4E3D-8739-742473FE0BB5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "src\OcelotApiGateway\OcelotApiGateway.csproj", "{90E769E6-4231-469E-AF54-737021E6C09C}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiAuthentication", "src\ApiAuthentication\ApiAuthentication.csproj", "{2CFCFA33-289E-4C3C-8FB4-F91AC2E65A27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWritter", "src\ApiWritter\ApiWritter.csproj", "{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 - Building Blocks", "00 - Building Blocks", "{27D5B62E-9FE4-41ED-9149-1B2267F7CCED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{306DF534-1DF9-4685-A2B0-59667944BDB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306DF534-1DF9-4685-A2B0-59667944BDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306DF534-1DF9-4685-A2B0-59667944BDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306DF534-1DF9-4685-A2B0-59667944BDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306DF534-1DF9-4685-A2B0-59667944BDB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{90E769E6-4231-469E-AF54-737021E6C09C} = {7C1E7A66-B2A8-4E3D-8739-742473FE0BB5}
 		{2CFCFA33-289E-4C3C-8FB4-F91AC2E65A27} = {4F57295A-236B-455A-A0BC-EFD5BE3D90FA}
 		{E529D7BF-09F7-4E2A-BBFC-FE0FA03477A2} = {3C09D0E4-0648-4603-9824-65633F1CBA48}
+		{306DF534-1DF9-4685-A2B0-59667944BDB7} = {27D5B62E-9FE4-41ED-9149-1B2267F7CCED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {20AD705A-456A-45C1-9AEB-90A5B27CD40E}

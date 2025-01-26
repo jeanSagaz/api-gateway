@@ -2,6 +2,7 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using OcelotApiGateway.Middlewares;
 using OcelotApiGateway.Services.Handlers;
+using Core.JwtConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -16,6 +17,7 @@ builder.Services.AddOcelot(builder.Configuration)
 .AddDelegatingHandler<RequestHandler>(true);
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddControllers();
 
