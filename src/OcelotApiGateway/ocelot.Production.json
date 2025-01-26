@@ -30,7 +30,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/writers/{id}",
@@ -42,7 +46,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/writers",
@@ -54,7 +62,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/articles/wf",
@@ -66,7 +78,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/articles",
@@ -78,7 +94,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     {
       "UpstreamPathTemplate": "/gateway/articles/{id}",
@@ -90,7 +110,11 @@
           "Host": "localhost",
           "Port": 5002
         }
-      ]
+      ],
+      "SwaggerKey": "writer",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     },
     // api - Time
     {
@@ -104,7 +128,10 @@
           "Port": 443
         }
       ],
-      "SwaggerKey": "time"
+      "SwaggerKey": "time",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
     }
   ],
   "SwaggerEndPoints": [

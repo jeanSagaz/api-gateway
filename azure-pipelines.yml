@@ -24,10 +24,8 @@ variables:
 - name: imageAuthRepository
   value: 'authentication_api'
 - name: dockerfileGatewayPath
-  # value: '$(Build.SourcesDirectory)/src/OcelotApiGateway/Dockerfile'
   value: '$(Build.SourcesDirectory)/Dockerfile-Ocelot'
 - name: dockerfileAuthPath
-  # value: '$(Build.SourcesDirectory)/src/ApiAuthentication/Dockerfile'
   value: '$(Build.SourcesDirectory)/Dockerfile-Auth'
   # Agent VM image name
 - name: vmImageName
